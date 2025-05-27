@@ -159,6 +159,13 @@ pub trait Domain {
     /// Prepare an ephemeral public key for more efficient scalar multiplication.
     fn prepare_epk(epk: Self::EphemeralPublicKey) -> Self::PreparedEphemeralPublicKey;
 
+    /// Derives `EphemeralPublicKey` from `esk` intended recipient address's diversifier,
+    /// with no required knowledge of Note data.
+    fn ka_derive_public_from_recipient(
+        recipient: &Self::Recipient,
+        esk: &Self::EphemeralSecretKey,
+    ) -> Self::EphemeralPublicKey;
+
     /// Derives `EphemeralPublicKey` from `esk` and the note's diversifier.
     fn ka_derive_public(
         note: &Self::Note,
