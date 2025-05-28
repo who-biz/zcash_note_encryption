@@ -163,7 +163,7 @@ pub trait Domain {
     /// with no required knowledge of Note data.
     fn ka_derive_public_from_recipient(
         recipient: &Self::Recipient,
-        esk: &EphemeralKeyBytes,
+        esk_bytes: &EphemeralKeyBytes,
     ) -> Self::EphemeralPublicKey;
 
     /// Derives `EphemeralPublicKey` from `esk` and the note's diversifier.
@@ -225,6 +225,13 @@ pub trait Domain {
     /// `EphemeralPublicKey`.
     fn epk(ephemeral_key: &EphemeralKeyBytes) -> Option<Self::EphemeralPublicKey>;
 
+
+    /// Attempts to parse `ephemeral_key` as an `EphemeralSecretKey`.
+    ///
+    /// Returns 'None' if `ephemeral_key` is not a valid byte encoding of an
+    /// `EphemeralSecretKey`
+    fn esk(ephemeral_key: &EphemeralKeyBytes) -> Option<Self::EphemeralSecretKey>;
+ 
     /// Derives the `ExtractedCommitment` for this note.
     fn cmstar(note: &Self::Note) -> Self::ExtractedCommitment;
 
