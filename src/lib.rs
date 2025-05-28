@@ -163,7 +163,7 @@ pub trait Domain {
     /// with no required knowledge of Note data.
     fn ka_derive_public_from_recipient(
         recipient: &Self::Recipient,
-        esk: &Self::EphemeralSecretKey,
+        esk: &EphemeralKeyBytes,
     ) -> Self::EphemeralPublicKey;
 
     /// Derives `EphemeralPublicKey` from `esk` and the note's diversifier.
